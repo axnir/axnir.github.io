@@ -4,25 +4,6 @@
   
   
   <entry>
-    <title>&lt;React Hooks之useEffect&gt;</title>
-    <link href="/2021/01/31/React-Hooks%E4%B9%8BuseEffect/"/>
-    <url>/2021/01/31/React-Hooks%E4%B9%8BuseEffect/</url>
-    
-    <content type="html"><![CDATA[<p>有关useEffect的一些问题。</p><ol><li><p>组件内的每一个函数（包括事件处理函数，effects，定时器或者API调用等等）会捕获定义它们的那次渲染中的props和state。</p></li><li><p>依赖项需要如实填写，如果设置了依赖项，effect中用到的所有组件内的值都要包含在依赖中。包括props，state，函数 — <strong>组件</strong>内的任何东西。</p><ul><li><p>当effect中需要用到上一次的state值，可以使用<code>useState</code>的函数形式。</p><p>  举个栗子🌰️：</p><p>  在<code>useEffect</code>中设置一个定时器，每过一秒count的值就+1，有两种实现形式。</p><ul><li><p>第一种：</p><pre><code class="hljs jsx">useEffect(<span class="hljs-function">() =&gt;</span> &#123;    <span class="hljs-keyword">const</span> id = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;      setCount(count + <span class="hljs-number">1</span>);    &#125;, <span class="hljs-number">1000</span>);    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">clearInterval</span>(id);  &#125;, [count]);</code></pre></li><li><p>第二种：</p><pre><code class="hljs jsx">useEffect(<span class="hljs-function">() =&gt;</span> &#123;    <span class="hljs-keyword">const</span> id = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;      setCount(<span class="hljs-function"><span class="hljs-params">c</span> =&gt;</span> c + <span class="hljs-number">1</span>);    &#125;, <span class="hljs-number">1000</span>);    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">clearInterval</span>(id);  &#125;, []);</code></pre><p>这两种形式虽然都可以完成任务，但是第一种方法的定时器每次都会在count改变后清除和重新设定，而第二种方法却不需要。</p></li></ul></li><li><p>函数可以成为依赖，对于<code>useEffect</code>中的函数依赖，有以下几种解决措施：</p><ul><li><p>第一种：如果某些函数仅在effect中调用，你可以把它们的定义移到effect中。</p></li><li><p>第二种：不止在effect中调用，但是这个函数没有使用组件内的任何值，可以将函数放到组件外面定义。</p></li><li><p>第三种：不止在effect中调用，可以将这个函数使用<code>useCallback</code>进行包装</p></li></ul></li></ul></li></ol>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>react</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Hello World</title>
     <link href="/2020/11/17/hello-world/"/>
     <url>/2020/11/17/hello-world/</url>
